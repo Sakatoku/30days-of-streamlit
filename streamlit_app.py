@@ -4,20 +4,21 @@ import re
 
 import pandas as pd
 import streamlit as st
-from streamlit.locale import gettext as _
+# from streamlit.locale import gettext as _
+# import gettext
 from PIL import Image
 
 st.set_page_config(layout="wide")
 
-query_params = st.experimental_get_query_params()
-
+if "language" not in st.session_state:
+    st.session_state["language"] = "ja"
 selected_language = st.session_state["language"]
 
+def _(text):
+    return text
 
 def update_params():
-    st.experimental_set_query_params(
-        challenge=st.session_state.day)
-
+    st.query_params["challenge"] = st.session_state.day
 
 def format_day(label):
     return _("Day {day}").format(day=int(re.search(r'\d+', label).group()))
@@ -40,13 +41,12 @@ st.markdown(_("# 30 Days of Streamlit"))
 
 days_list = [f"Day{x}" for x in md_files]
 
-if query_params:
-    try:
-        selected_day = query_params["challenge"][0]
-        if selected_day in days_list:
-            st.session_state.day = selected_day
-    except KeyError:
-        st.session_state.day = days_list[0]
+try:
+    selected_day = st.query_params["challenge"][0]
+    if selected_day in days_list:
+        st.session_state.day = selected_day
+except KeyError:
+    st.session_state.day = days_list[0]
 
 selected_day = st.selectbox(
     _("Start the Challenge 👇"), days_list, key="day", on_change=update_params,
@@ -90,7 +90,7 @@ st.sidebar.markdown(_(
 for day in days_list:
     if selected_day == day:
         st.markdown(_("# 🗓️ Which {day_num}").format(day_num=int(re.search(r'\d+', day).group())))
-        with open(f"content/{selected_language}/{day}.md", "r") as f:
+        with open(f"content/{selected_language}/{day}.md", "r", encoding="utf8") as f:
             st.markdown(f.read())
         if os.path.isfile(f"content/{selected_language}/figures/{day}.csv"):
             st.markdown("---")
