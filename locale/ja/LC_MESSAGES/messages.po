@@ -1,10 +1,14 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+
 #: streamlit_app.py:23 streamlit_app.py:32
 msgid "Day {day}"
 msgstr "{day}日目"
 
 #: streamlit_app.py:39
 msgid "# 30 Days of Streamlit"
-msgstr "30日のストリームリット"
+msgstr "30 Days of Streamlit"
 
 #: streamlit_app.py:52
 msgid "Start the Challenge 👇"
@@ -12,7 +16,7 @@ msgstr "👇 チャレンジ開始"
 
 #: streamlit_app.py:56
 msgid "About the #30DaysOfStreamlit"
-msgstr "30DaysOfStreamlitについて"
+msgstr "#30DaysOfStreamlit について"
 
 #: streamlit_app.py:57
 msgid ""
@@ -62,7 +66,7 @@ msgstr ""
 "\n"
 "- [Streamlit ドキュメント](https://docs.streamlit.io/)\n"
 "- [チートシート](https://docs.streamlit.io/library/cheatsheet)\n"
-"- [書籍](https://www.amazon.com/dp/180056550X) (データサイエンスのためのStreamlit入門)\n"
+"- [書籍](https://techbookfest.org/product/fhiwFCAW3weeFibUeFc4p1) (Streamlit入門　Pythonで学ぶデータ可視化&アプリ開発ガイド)\n"
 "- [ブログ](https://blog.streamlit.io/how-to-master-streamlit-for-data-"
 "science/) (データサイエンスのためのStreamlitの使いこなし方)\n"
 

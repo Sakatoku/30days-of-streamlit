@@ -4,18 +4,34 @@ import re
 
 import pandas as pd
 import streamlit as st
-# from streamlit.locale import gettext as _
-# import gettext
+import gettext
 from PIL import Image
+
+# 標準のi18n(Internationalization)モジュールの初期化
+def init_translation(language):
+    # 翻訳ファイルを配置するディレクトリの指定
+    locale_dir = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "./locale"
+        )
+    )
+
+    # 翻訳用クラスの設定して、translater.gettextを_()にバインドする
+    translater = gettext.translation(
+        "messages",           # domain: 辞書ファイルの名前
+        localedir=locale_dir, # 辞書ファイル配置ディレクトリ
+        languages=[language], # 翻訳に使用する言語
+        fallback=False        # .moファイルが見つからなかった時は未翻訳の文字列を出力
+    )
+    translater.install()
 
 st.set_page_config(layout="wide")
 
 if "language" not in st.session_state:
     st.session_state["language"] = "ja"
 selected_language = st.session_state["language"]
-
-def _(text):
-    return text
+init_translation(selected_language)
 
 def update_params():
     st.query_params["challenge"] = st.session_state.day
